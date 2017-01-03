@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.4" type="plugin" group="content" method="upgrade">
+    <name>PLG_CONTENT_CEDGOOGLEPLUSCOMMENTS</name>
+    <creationDate>2016-12-31</creationDate>
+    <element>cedgooglepluscomments</element>
+
+    <version>1.4.2</version>
+
+    <author>Galaxiis</author>
+    <authorEmail>galaxiiscom@gmail.com</authorEmail>
+    <authorUrl>www.galaxiis.com</authorUrl>
+
+    <copyright>Copyright (C) 2013-2016 galaxiis.com All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL 3.0</license>
+
+    <description>PLG_CONTENT_CEDGOOGLEPLUSCOMMENTS_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="cedgooglepluscomments">cedgooglepluscomments.php</filename>
+        <filename plugin="cedgooglepluscomments">index.html</filename>
+        <folder>language</folder>
+    </files>
+
+    <config addfieldpath="libraries/galaxiis/fields">
+        <fields name="params">
+            <fieldset name="basic">
+                <field shortId="cedgooglepluscomments"
+                       name="toolbar"
+                       type="galaxiisbar"/>
+                <field
+                        name="message"
+                        type="galaxiismessage"
+                        message="note"
+                        label="Please help us: vote, suggest and give us your opinion in the Joomla extensions directory. With this you will help us to increase our interest to modify and update the extension. Thank you very much."/>
+                <field
+                        name="version_msg"
+                        type="galaxiismessage"
+                        message="version"
+                        version="1.4.2"
+                        extension_name="CedGooglePlusComments"/>
+            </fieldset>
+            <fieldset name="settings" label="Settings">
+                <field
+                        name="profile_id"
+                        type="text"
+                        default=""
+                        size="27"
+                        label="PLG_CONTENT_CEDGOOGLEPLUSCOMMENTS_ID"
+                        description="PLG_CONTENT_CEDGOOGLEPLUSCOMMENTS_ID_DESC"
+                />
+
+
+                <field name="width" type="integer"
+                       required="true"
+                       default="500" label="PLG_CONTENT_CEDGOOGLEPLUSCOMMENTS_WIDTH"
+                       description="PLG_CONTENT_CEDGOOGLEPLUSCOMMENTS_WIDTH_DESC"
+                       first="1"
+                       last="1000"
+                       step="1"/>
+
+                <field name="spacer_counter" type="spacer"
+                       label="&lt;div style=&quot;font-weight:bold;font-size:11px;color:#000;padding:8px;margin:0;background:#ffd;&quot;&gt;Get 'Counter' comments display &lt;a target=&quot;_blank&quot; href=&quot;http://www.galaxiis.com/cedfacebookcomments-subscribe/&quot;&gt;get the Premium Version of CedFacebookComments now.&lt;/a&gt;&lt;/div&gt;"
+                       default="" description=""/>
+
+
+                <field name="showIcon" type="radio" default="1" label="Show Comment Icon"
+                       description="Enable comment icon if count is shown. Default is Yes."
+                       class="btn-group">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="icon" type="awesome" default="fa-comment" label="Comment icon type"
+                       description="Enable comment icon if count is shown. Default is fa-comment"
+                       class="btn-group"
+                       showon="showIcon:1">
+                    <option value="fa-comment">icon</option>
+                    <option value="fa-comment-o">icon</option>
+                    <option value="fa-comments">icon</option>
+                    <option value="fa-comments-o">icon</option>
+                    <option value="fa-google-plus">icon</option>
+                    <option value="fa-google-plus-square">icon</option>
+                    <option value="fa-pencil-square-o">icon</option>
+                </field>
+
+                <field name="spacer_categories" type="spacer"
+                       label="&lt;div style=&quot;font-weight:bold;font-size:11px;color:#000;padding:8px;margin:0;background:#ffd;&quot;&gt;'Get 'Category selection' &lt;a target=&quot;_blank&quot; href=&quot;http://www.galaxiis.com/cedfacebookcomments-subscribe/&quot;&gt;get the Premium Version of CedFacebookComments now.&lt;/a&gt;&lt;/div&gt;"
+                       default="" description=""/>
+
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>
