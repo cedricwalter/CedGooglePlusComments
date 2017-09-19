@@ -3,7 +3,7 @@
  * @package     CedGooglePlusComments
  * @subpackage  com_cedgooglepluscomments
  *
- * @copyright   Copyright (C) 2013-2016 galaxiis.com All rights reserved.
+ * @copyright   Copyright (C) 2013-2017 galaxiis.com All rights reserved.
  * @license     The author and holder of the copyright of the software is Cédric Walter. The licensor and as such issuer of the license and bearer of the
  *              worldwide exclusive usage rights including the rights to reproduce, distribute and make the software available to the public
  *              in any form is Galaxiis.com
@@ -28,25 +28,27 @@ class PlgContentCedGooglePlusComments extends JPlugin
     private $extension = 'plg_content_cedgooglepluscomments';
 
 
-    public function __construct(&$subject, $config)
-    {
-        parent::__construct($subject, $config);
-        $this->loadLanguage();
-    }
+    /**
+     * Load the language file on instantiation.
+     *
+     * @var    boolean
+     * @since  3.1
+     */
+    protected $autoloadLanguage = true;
 
     function onContentPrepare($context, &$row, &$params, $page = 0)
     {
         //Do not run in admin area and non HTML  (rss, json, error)
         $app = JFactory::getApplication();
-        if ($app->isAdmin() || JFactory::getDocument()->getType() !== 'html')
+        if ($app->isClient('administrator') || JFactory::getDocument()->getType() !== 'html')
         {
-            return true;
+            return;
         }
 
 	    // Return if we don't have a valid article id
 	    if (!isset($row->id) || !(int) $row->id)
 	    {
-		    return true;
+		    return;
 	    }
 
         $print = JFactory::getApplication()->input->get('print') == 1;
@@ -60,8 +62,8 @@ class PlgContentCedGooglePlusComments extends JPlugin
     {
         //Do not run in admin area
         $app = JFactory::getApplication();
-        if ($app->isAdmin()) {
-            return true;
+        if ($app->isClient('administrator')) {
+            return;
         }
 
         if ($this->params->get('counter', 1)) {
@@ -74,7 +76,7 @@ class PlgContentCedGooglePlusComments extends JPlugin
 
     /**
      * Handle adding credentials to package download request
-     *
+     * Joomla! 2: version 2.5.19+ or Joomla! 3: version 3.2.3+
      * @param   string  $url        url from which package is going to be downloaded
      * @param   array   $headers    headers to be sent along the download request (key => value format)
      *
@@ -123,7 +125,7 @@ class PlgContentCedGooglePlusComments extends JPlugin
 
         $uri = JUri::getInstance();
         if ($view == 'article') {
-            $output = '<!-- Copyright (C) 2013-2016 galaxiis.com All rights reserved. -->';
+            $output = '<!-- Copyright (C) 2013-2017 galaxiis.com All rights reserved. -->';
             $output .= '
                         <a id="g-comments"></a>
                         <div class="g-comments"
@@ -139,7 +141,7 @@ class PlgContentCedGooglePlusComments extends JPlugin
 
             $icon = "";
             if ($this->params->get('showIcon', 1)) {
-                $document->addStyleSheet('//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+                $document->addStyleSheet('//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
                 $icon = '<span class="fa '.$this->params->get('icon', 'fa-comment').' pull-left fa-border"></span>';
             }
